@@ -28,8 +28,18 @@
  *      .catch((error) => console.log(error.message)) // 'Error: Wrong parameter is passed!
  *                                                    //  Ask her again.';
  */
-function willYouMarryMe(/* isPositiveAnswer */) {
-  throw new Error('Not implemented');
+function willYouMarryMe(isPositiveAnswer) {
+  return new Promise(((resolve) => {
+    if (typeof isPositiveAnswer === 'boolean') {
+      if (isPositiveAnswer) {
+        resolve('Hooray!!! She said "Yes"!');
+      } else {
+        resolve('Oh no, she said "No".');
+      }
+    } else {
+      throw Error('Wrong parameter is passed! Ask her again.');
+    }
+  }));
 }
 
 
@@ -48,8 +58,17 @@ function willYouMarryMe(/* isPositiveAnswer */) {
  *    })
  *
  */
-function processAllPromises(/* array */) {
-  throw new Error('Not implemented');
+function processAllPromises(array) {
+  return new Promise(((resolve) => {
+    const newArr = [];
+    for (let i = 0; i < array.length; i += 1) {
+      array[i]
+        .then((res) => {
+          array.push(res);
+        });
+    }
+    resolve(newArr);
+  }));
 }
 
 /**
@@ -71,8 +90,16 @@ function processAllPromises(/* array */) {
  *    })
  *
  */
-function getFastestPromise(/* array */) {
-  throw new Error('Not implemented');
+function getFastestPromise(array) {
+  return new Promise(((resolve, reject) => {
+    Promise.race(array)
+      .then((value) => {
+        resolve(value);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  }));
 }
 
 /**
@@ -94,6 +121,45 @@ function getFastestPromise(/* array */) {
  */
 function chainPromises(/* array, action */) {
   throw new Error('Not implemented');
+  // return new Promise(((resolve) => {
+  //   Promise.allSettled(array)
+  //     .then((results) => {
+  //       console.log(`-results: ${results}`);
+  //       const resultArray = [];
+  //
+  //       for (let i = 0; i < results.length; i += 1) {
+  //         if (results[i].status === 'fulfilled') {
+  //           console.log('-push');
+  //           resultArray.push(results[i]);
+  //         }
+  //       }
+  //
+  //       console.log(`-resultArray: ${results}`);
+  //       const buffer = resultArray.reduce(action);
+  //
+  //       console.log(`-buffer: ${buffer}`);
+  //       resolve(buffer);
+  //     });
+
+  // for (let i = 0; i < array.length; i += 1) {
+  //   try {
+  //     array[i]
+  //       .then((res) => {
+  //         console.log('-push');
+  //         resultArray.push(res);
+  //       })
+  //       .catch((err) => {
+  //         console.log(`-err: ${err}`);
+  //       });
+  //   } catch (e) {
+  //     console.log(`-e: ${e}`);
+  //   }
+  // }
+  // let buffer = resultArray[0];
+  // for (let i = 1; i < resultArray.length; i += 1) {
+  //   buffer = action(buffer, resultArray[i]);
+  // }
+  // }));
 }
 
 module.exports = {

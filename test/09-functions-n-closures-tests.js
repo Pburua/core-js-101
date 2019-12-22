@@ -52,6 +52,9 @@ describe('09-functions-n-closures-tasks', () => {
       data.results.forEach((test) => {
         assert(
           test.y === data.polynom(test.x),
+          // tasks.getPolynom(1, -3) => y = x - 3
+          // { x: 0, y: -3 }
+          // -3 === func(1, -3)(0)
         );
       });
     });
@@ -119,7 +122,7 @@ describe('09-functions-n-closures-tasks', () => {
       assert.equal(
         log,
         'testLogger(["expected","test",1],0) starts\n',
-        'logger function shoud log the start of specified function before calling',
+        'logger function should log the start of specified function before calling',
       );
       isCalling = true;
       return param[index];
@@ -139,7 +142,7 @@ describe('09-functions-n-closures-tasks', () => {
       log,
       'testLogger(["expected","test",1],0) starts\n'
       + 'testLogger(["expected","test",1],0) ends\n',
-      'logger function shoud log the end of specified function after calling',
+      'logger function should log the end of specified function after calling',
     );
   });
 
